@@ -1,0 +1,50 @@
+[
+    {
+        "_id": { "$oid": "64f1b9fae88e4a1c1b6c5f01" },
+        "name": "Apple iPhone 14",
+        "description": "Latest model with A16 Bionic chip and improved cameras.",
+        "imageFile": "iphone14.jpg",
+        "price": { "$numberDecimal": "999.99" },
+        "isAvailable": true,
+        "brand": {
+            "_id": { "$oid": "64f1b9fae88e4a1c1b6c5001" },
+            "name": "Apple"
+        },
+        "productType": {
+            "_id": { "$oid": "64f1b9fae88e4a1c1b6c5101" },
+            "name": "Smartphone"
+        }
+    },
+    {
+        "_id": { "$oid": "64f1b9fae88e4a1c1b6c5f02" },
+        "name": "Samsung Galaxy S23",
+        "description": "Powerful performance and vibrant display from Samsung.",
+        "imageFile": "galaxy-s23.jpg",
+        "price": { "$numberDecimal": "899.50" },
+        "isAvailable": true,
+        "brand": {
+            "_id": { "$oid": "64f1b9fae88e4a1c1b6c5002" },
+            "name": "Samsung"
+        },
+        "productType": {
+            "_id": { "$oid": "64f1b9fae88e4a1c1b6c5101" },
+            "name": "Smartphone"
+        }
+    },
+    {
+        "_id": { "$oid": "64f1b9fae88e4a1c1b6c5f03" },
+        "name": "Sony WH-1000XM5",
+        "description": "Noise-cancelling wireless headphones with excellent sound.",
+        "imageFile": "sony-wh1000xm5.jpg",
+        "price": { "$numberDecimal": "349.99" },
+        "isAvailable": true,
+        "brand": {
+            "_id": { "$oid": "64f1b9fae88e4a1c1b6c5003" },
+            "name": "Sony"
+        },
+        "productType": {
+            "_id": { "$oid": "64f1b9fae88e4a1c1b6c5102" },
+            "name": "Headphones"
+        }
+    }
+]

@@ -1,0 +1,18 @@
+[
+    {
+        "_id": { "$oid": "64f1b9fae88e4a1c1b6c5101" },
+        "name": "Smartphone"
+    },
+    {
+        "_id": { "$oid": "64f1b9fae88e4a1c1b6c5102" },
+        "name": "Headphones"
+    },
+    {
+        "_id": { "$oid": "64f1b9fae88e4a1c1b6c5103" },
+        "name": "Laptop"
+    },
+    {
+        "_id": { "$oid": "64f1b9fae88e4a1c1b6c5104" },
+        "name": "Tablet"
+    }
+]
