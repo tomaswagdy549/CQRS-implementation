@@ -1,4 +1,5 @@
 ﻿using Catalog.Application.Features.Products.Queries;
+using Catalog.Application.Features.Products.Queries.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
