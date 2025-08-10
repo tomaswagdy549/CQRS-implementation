@@ -1,4 +1,4 @@
-﻿using Catalog.Application.Common.GenericResponse;
+﻿using Catalog.Core.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;

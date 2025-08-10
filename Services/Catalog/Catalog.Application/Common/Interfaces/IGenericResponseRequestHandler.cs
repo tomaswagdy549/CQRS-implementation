@@ -1,4 +1,4 @@
-﻿using Catalog.Application.Common.GenericResponse;
+﻿using Catalog.Core.Entities;
 using MediatR;
 
 namespace Catalog.Application.Common.Interfaces
