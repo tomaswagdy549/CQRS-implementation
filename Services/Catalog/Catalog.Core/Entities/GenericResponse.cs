@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Catalog.Application.Common.GenericResponse
+namespace Catalog.Core.Entities
 {
     public class GenericResponse<T>
     {

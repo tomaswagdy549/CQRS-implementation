@@ -1,5 +1,4 @@
-﻿using Catalog.Application.Common.GenericResponse;
-using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Common.Interfaces;
 using Catalog.Application.Features.ProductType.Dtos.CreateProductTypeResponse;
 using Catalog.Core.Entities;
 using Catalog.Core.Repositories.IProductType;
