@@ -1,24 +1,20 @@
+﻿using Catalog.Api.ActionFilters;
 using Catalog.Application;
 using Catalog.Infrastructure;
-
+using Catalog.Presentation;
+using Catalog.Presentation.MiddleWares;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers();
 // Infrastructure Layer register 
 builder.Services.AddCatalogInfrastructure();
 
 // Application Layer register 
 builder.Services.AddCatalogServices();
 
+// Presentation Layer register 
+builder.Services.AddCatalogPresentation();
 
-// Api versioning 
-builder.Services.AddApiVersioning(options =>
-{
-    options.ReportApiVersions = true;
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
-});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -35,27 +31,21 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 builder.Services.AddOpenApi();
-
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<TimePerformanceMeterActionFilter>();
+});
 var app = builder.Build();
 
-
-// seeding data
-//using (var scope = app.Services.CreateScope())
-//{
-//    var context = scope.ServiceProvider.GetRequiredService<ICatalogContext>();
-//    await CatalogContextSeed.SeedAsync(context);
-//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwaggerUI();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog API v1"));
 }
-
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseMiddleware<GlobalExceptionHandlerMiddleWare>();
 app.Run();
