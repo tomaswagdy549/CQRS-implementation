@@ -1,10 +1,7 @@
-﻿using Catalog.Application.Behaviours.TimePerformancePipeLineBehaviour;
-using Catalog.Application.Behaviours.UnitOfWorkPipeLineBehaviour;
+﻿using Catalog.Application.Behaviours.UnitOfWorkPipeLineBehaviour;
 using Catalog.Application.Behaviours.ValidationPipeLineBehaviour;
-using Catalog.Core.Entities;
 using Catalog.Application.Features.Products.MappingProfile;
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Catalog.Application;
