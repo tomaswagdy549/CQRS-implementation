@@ -17,7 +17,7 @@ public static class ApplicationDependencyInjection
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblies(typeof(ProductMappingProfile).Assembly);
-            cfg.AddOpenBehavior(typeof(TimePerformancePipeLineBehaviour<,>), serviceLifetime: ServiceLifetime.Scoped);
+            //cfg.AddOpenBehavior(typeof(TimePerformancePipeLineBehaviour<,>), serviceLifetime: ServiceLifetime.Scoped);
             cfg.AddOpenBehavior(typeof(ValidationPipeLineBehaviour<,>), serviceLifetime: ServiceLifetime.Scoped);
             cfg.AddOpenBehavior(typeof(UnitOfWorkPipeLineBehaviour<,>), serviceLifetime: ServiceLifetime.Scoped);
         }
