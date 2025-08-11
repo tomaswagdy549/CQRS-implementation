@@ -1,4 +1,6 @@
 ﻿
+using Catalog.Core.Entities;
+
 namespace Catalog.Presentation.MiddleWares
 {
     public class GlobalExceptionHandlerMiddleWare
@@ -18,7 +20,14 @@ namespace Catalog.Presentation.MiddleWares
             }
             catch(Exception ex)
             {
+                var errorResponse = new GenericResponse<string>()
+                {
+                    Data = "",
+                    Message = $"Exception happened , {ex.Message}",
+                    HttpStatusCode = System.Net.HttpStatusCode.InternalServerError
+                };
                 _logger.LogError(ex, $"Exception happened : {ex.Message}");
+                await context.Response.WriteAsJsonAsync(errorResponse);
             }
         }
     }
