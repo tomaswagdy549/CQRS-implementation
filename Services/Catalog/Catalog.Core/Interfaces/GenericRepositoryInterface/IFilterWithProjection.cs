@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Catalog.Core.Entities;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Catalog.Core.Interfaces.GenericRepositoryInterface
 {
-    public interface IFilterWithProjection<T>
+    public interface IFilterWithProjection<T> 
     {
-        public IQueryable<Dto> FilterWithProjection<Dto>(Expression<Func<T, bool>> FilterExpression);
+        public PaginationGenericResult<IQueryable<TDto>> FilterWithProjection<TDto>(Expression<Func<T, bool>> filterExpression, Expression<Func<T, TDto>> mappingExpression, int pageNumber, int pageSize, bool asNoTracking = true);
     }
 }

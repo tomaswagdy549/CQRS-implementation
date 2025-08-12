@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Catalog.Core.Entities;
 
 namespace Catalog.Core.Interfaces.GenericRepositoryInterface
 {
     public interface IGetAll<T>
     {
-        public IQueryable<T> GetAll();
+        public PaginationGenericResult<IQueryable<T>> GetAll(int pageNumber, int pageSize, bool asNoTracking = true);
     }
 }

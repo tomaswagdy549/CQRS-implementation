@@ -1,4 +1,7 @@
-﻿using Catalog.Core.Interfaces.GenericRepositoryInterface;
+﻿using App.Infrastructure;
+using Catalog.Core.Interfaces.GenericRepositoryInterface;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +10,17 @@ using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Repositories.GenericRepository.Add
 {
-    public class Add<T> : IAdd<T>
+    public class Add<T> : IAdd<T> where T : class
     {
-        Task<T> IAdd<T>.Add(T entity)
+        readonly DbSet<T> _dbSet;
+        public Add(ApplicationDbContext ApplicationDbContext)
         {
-            throw new NotImplementedException();
+            _dbSet = ApplicationDbContext.Set<T>();
+        }
+        async Task<T> IAdd<T>.AddAsync(T entity)
+        {
+            await _dbSet.AddAsync(entity);
+            return entity;
         }
     }
 }

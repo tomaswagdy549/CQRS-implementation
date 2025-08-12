@@ -1,4 +1,6 @@
-﻿using Catalog.Core.Interfaces.GenericRepositoryInterface;
+﻿using App.Infrastructure;
+using Catalog.Core.Interfaces.GenericRepositoryInterface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +9,17 @@ using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Repositories.GenericRepository.Update
 {
-    public class Update<T> : IUpdate<T>
+    public class Update<T> : IUpdate<T> where T : class
     {
-        Task<T> IUpdate<T>.Update(T entity)
+        readonly DbSet<T> _dbSet;
+        public Update(ApplicationDbContext ApplicationDbContext)
         {
-            throw new NotImplementedException();
+            _dbSet = ApplicationDbContext.Set<T>();
+        }
+        T IUpdate<T>.Update(T entity)
+        {
+            _dbSet.Update(entity);
+            return entity;
         }
     }
 }

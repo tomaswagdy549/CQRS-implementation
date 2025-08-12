@@ -1,6 +1,7 @@
 ﻿using Catalog.Application.Common.Interfaces;
 using Catalog.Application.Features.ProductType.Dtos.CreateProductTypeResponse;
 using Catalog.Core.Entities;
+using Catalog.Core.Interfaces.GenericRepositoryInterface;
 using Catalog.Core.Repositories.IProductType;
 using MediatR;
 using System;
@@ -13,10 +14,10 @@ namespace Catalog.Application.Features.ProductType.Commands.CreateProductType
 {
     public class CreateProductTypeCommandHandler : IGenericResponseRequestHandler<CreateProductTypeCommand, CreateProductTypeResponse>
     {
-        IProductTypeRepository _productTypeRepository { get; set; }
-        public CreateProductTypeCommandHandler(IProductTypeRepository productTypeRepository)
+        IAdd<Core.Entities.ProductType> _addProductTypeRepository { get; set; }
+        public CreateProductTypeCommandHandler(IAdd<Core.Entities.ProductType> addProductTypeRepository)
         {
-            _productTypeRepository = productTypeRepository;
+            _addProductTypeRepository = addProductTypeRepository;
         }
 
         public async Task<GenericResponse<CreateProductTypeResponse>> Handle(CreateProductTypeCommand request, CancellationToken cancellationToken)
@@ -25,7 +26,7 @@ namespace Catalog.Application.Features.ProductType.Commands.CreateProductType
             {
                 Name = request.Name
             };
-            var result = await _productTypeRepository.CreateProductType(productType);
+            var result = await _addProductTypeRepository.AddAsync(productType);
             return new GenericResponse<CreateProductTypeResponse>()
             {
                 Data = new CreateProductTypeResponse(result.Name),
@@ -33,15 +34,5 @@ namespace Catalog.Application.Features.ProductType.Commands.CreateProductType
                 HttpStatusCode = System.Net.HttpStatusCode.Created
             };
         }
-
-        //public async Task<CreateProductTypeResponse> Handle(CreateProductTypeCommand request, CancellationToken cancellationToken)
-        //{
-        //    var productType = new Core.Entities.ProductType()
-        //    {
-        //        Name = request.Name
-        //    };
-        //    var result = await _productTypeRepository.CreateProductType(productType);
-        //    return new CreateProductTypeResponse(request.Name);
-        //}
     }
 }
