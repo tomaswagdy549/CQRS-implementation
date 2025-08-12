@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Catalog.Core.Entities;
+using System.Linq.Expressions;
 
 namespace Catalog.Core.Interfaces.GenericRepositoryInterface
 {
     public interface IGetWithProjection<T>
     {
-        public Task<IQueryable<Dto>> GetWithProjection<Dto>();
+        public PaginationGenericResult<IQueryable<Dto>> GetWithProjection<Dto>(Expression<Func<T, Dto>> mappingExpression, int pageNumber, int pageSize, bool asNoTracking = true);
     }
 }
