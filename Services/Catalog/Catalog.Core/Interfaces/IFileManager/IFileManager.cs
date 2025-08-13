@@ -10,7 +10,7 @@ namespace Catalog.Core.Interfaces.IFileManager
 {
     public interface IFileManager
     {
-        Task<GenericResponse<string>> UploadFile(IFormFile file);
+        Task<GenericResponse<string>> UploadFileAsync(IFormFile file);
         Task<GenericResponse<List<string>>> UploadMultipleFiles(List<IFormFile> files);
         Task<GenericResponse<byte[]?>> DownLoadFile(string fileLink);
     }

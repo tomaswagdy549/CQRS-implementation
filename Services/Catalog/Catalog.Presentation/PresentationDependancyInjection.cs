@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Catalog.Presentation.ActionFilters;
+using Microsoft.Extensions.DependencyInjection;
 namespace Catalog.Presentation
 {
     public static class PresentationDependancyInjection
@@ -11,7 +12,10 @@ namespace Catalog.Presentation
                 options.AssumeDefaultVersionWhenUnspecified = true;
                 options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
             });
-            services.AddControllers()
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<ActionResultFactoryActionFilter>();
+            })
             .AddApplicationPart(typeof(Catalog.Presentation.PresentationDependancyInjection).Assembly);
             return services;
         }
