@@ -7,7 +7,7 @@ namespace Catalog.Infrastructure.Configurations.ProductType
     {
         public void Configure(EntityTypeBuilder<Core.Entities.ProductType> builder)
         {
-            builder.Property(p => p.Name).HasMaxLength(ValuesLimiter.NamesMaxLength);
+            builder.Property(p => p.Name).HasMaxLength(ValuesLimiter.NameMaxLength);
         }
     }
 }

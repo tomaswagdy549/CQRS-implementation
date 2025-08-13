@@ -54,7 +54,7 @@ namespace Catalog.Infrastructure.FileManager
             }
         }
 
-        public async Task<GenericResponse<string>> UploadFile(IFormFile file)
+        public async Task<GenericResponse<string>> UploadFileAsync(IFormFile file)
         {
             var configurationBuilder = new ConfigurationBuilder();
             var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
@@ -77,7 +77,7 @@ namespace Catalog.Infrastructure.FileManager
                         return new GenericResponse<string>()
                         {
                             Data = fileModel.Url,
-                            Message = "File Upload Succesfully",
+                            Message = "File Upload Succesfully , file remote link attached",
                             HttpStatusCode = System.Net.HttpStatusCode.OK
                         };
                     }

@@ -7,7 +7,7 @@ namespace Catalog.Infrastructure.Configurations.Brand
     {
         public void Configure(EntityTypeBuilder<Core.Entities.Brand> builder)
         {
-            builder.Property(b => b.Name).HasMaxLength(ValuesLimiter.NamesMaxLength);
+            builder.Property(b => b.Name).HasMaxLength(ValuesLimiter.NameMaxLength);
         }
     }
 }
