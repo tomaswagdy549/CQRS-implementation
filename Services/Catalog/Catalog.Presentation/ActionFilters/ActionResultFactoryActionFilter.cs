@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Catalog.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
 
 namespace Catalog.Presentation.ActionFilters
 {
@@ -16,19 +14,45 @@ namespace Catalog.Presentation.ActionFilters
         {
             if (context.Result is ObjectResult objectResult)
             {
-                var wrapped = new
+                var value = objectResult.Value;
+                var type = objectResult.Value.GetType();
+                if(type.IsGenericType && type.GetGenericTypeDefinition() == typeof(GenericResponse<>))
                 {
-                    status = objectResult.StatusCode ?? StatusCodes.Status200OK,
-                    data = objectResult.Value,
-                    message = "Success"
-                };
-
-                context.Result = new CreatedResult();
+                    var statusCodeProp = type.GetProperty(nameof(GenericResponse<object>.HttpStatusCode));
+                    var statusCodeValue = statusCodeProp?.GetValue(objectResult.Value);
+                    if (statusCodeValue is HttpStatusCode statusCode)
+                    {
+                        context.Result = MapToActionResult(statusCode, value);
+                    }
+                }
             }
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
+        }
+        private IActionResult MapToActionResult(HttpStatusCode httpStatusCode,object response)
+        {
+            switch (httpStatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return new OkObjectResult(response);
+                case System.Net.HttpStatusCode.NoContent:
+                    return new NoContentResult();
+                case System.Net.HttpStatusCode.Created:
+                    return new CreatedResult("", response);
+                case System.Net.HttpStatusCode.Unauthorized:
+                    return new UnauthorizedObjectResult(response);
+                case System.Net.HttpStatusCode.Forbidden:
+                    return new ForbidResult();
+                case System.Net.HttpStatusCode.NotFound:
+                    return new NotFoundObjectResult(response);
+                case System.Net.HttpStatusCode.BadRequest:
+                    return new BadRequestObjectResult(response);
+                default:
+                    return new BadRequestObjectResult(response);
+            }
+
         }
     }
 }
