@@ -1,6 +1,8 @@
 ﻿using Catalog.Api.Controllers;
 using Catalog.Application.Features.Products.Commands.CreateProductCommand;
+using Catalog.Application.Features.Products.Dtos.Products;
 using Catalog.Application.Features.ProductType.Commands.CreateProductType;
+using Catalog.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,10 +20,10 @@ namespace Catalog.Presentation.Controllers
         }
         [HttpPost]
         [Route("Add-Product")]
-        public async Task<IActionResult> AddProduct(CreateProductCommand createProductCommand, CancellationToken cancellationToken)
+        public async Task<GenericResponse<ProductResponseDto>> AddProduct(CreateProductCommand createProductCommand, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(createProductCommand, cancellationToken);
-            return Ok(result);
+            return result;
         }
 
     }
